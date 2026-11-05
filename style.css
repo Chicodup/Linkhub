@@ -14,6 +14,8 @@ body {
     transition: 0.4s;
 }
 
+/* Основна картка */
+
 .card {
     background: white;
     width: 350px;
@@ -21,6 +23,8 @@ body {
     border-radius: 20px;
     text-align: center;
     box-shadow: 0 10px 30px #0003;
+    position: relative;
+    z-index: 1;
 }
 
 .avatar {
@@ -46,6 +50,8 @@ h1 {
     margin-bottom: 25px;
 }
 
+/* Соціальні мережі */
+
 .links {
     display: flex;
     flex-direction: column;
@@ -68,6 +74,8 @@ h1 {
     transform: scale(1.05);
 }
 
+/* Кнопки */
+
 button {
     margin-top: 20px;
     padding: 12px 20px;
@@ -82,6 +90,24 @@ button {
 button:hover {
     background: #555;
 }
+
+/* Кнопка виверження */
+
+.eruption-button {
+    width: 100%;
+    margin-top: 12px;
+    background: linear-gradient(135deg, #ff512f, #dd2476);
+    font-weight: bold;
+    font-size: 12px;
+    box-shadow: 0 5px 15px #ff512f55;
+}
+
+.eruption-button:hover {
+    background: linear-gradient(135deg, #dd2476, #ff512f);
+    transform: scale(1.04);
+}
+
+/* Підвал */
 
 .footer {
     margin-top: 25px;
@@ -105,4 +131,173 @@ body.dark h1 {
 
 body.dark .description {
     color: #ccc;
+}
+
+/* Шар анімації */
+
+#eruptionLayer {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Тряска картки */
+
+body.erupting .card {
+    animation: shake 0.15s infinite;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(5px, -4px);
+    }
+
+    50% {
+        transform: translate(-5px, 4px);
+    }
+
+    75% {
+        transform: translate(4px, 3px);
+    }
+
+    100% {
+        transform: translate(-3px, -3px);
+    }
+}
+
+/* Спалах */
+
+.eruption-flash {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at 50% 85%,
+        #ffb000aa,
+        #ff450055,
+        transparent 70%
+    );
+
+    animation: flash 1s ease-out forwards;
+}
+
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Вулкан */
+
+.volcano {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 170px;
+    animation: volcano-bounce 0.4s infinite alternate;
+    filter: drop-shadow(0 0 30px #ff4500);
+}
+
+@keyframes volcano-bounce {
+    from {
+        transform: translateX(-50%) scale(1);
+    }
+
+    to {
+        transform: translateX(-50%) scale(1.15);
+    }
+}
+
+/* Написи SHKIBID */
+
+.skibidi-word {
+    position: absolute;
+    color: #fff000;
+    font-weight: 1000;
+    font-size: 30px;
+    text-shadow:
+        3px 3px 0 #ff0000,
+        0 0 15px #ff8c00;
+
+    white-space: nowrap;
+    animation: skibidi-appear 0.7s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes skibidi-appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.1) rotate(-30deg);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.3) rotate(10deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(var(--angle));
+    }
+}
+
+/* Частинки лави */
+
+.lava {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    background: linear-gradient(#fff000, #ff4500);
+    border-radius: 50%;
+    box-shadow: 0 0 15px #ff4500;
+
+    animation: lava-fly var(--duration) ease-out forwards;
+}
+
+@keyframes lava-fly {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(0.2);
+    }
+}
+
+/* Заголовок виверження */
+
+.eruption-title {
+    position: absolute;
+    top: 12%;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: clamp(25px, 6vw, 55px);
+    font-weight: 1000;
+    text-shadow: 0 0 20px red;
+    animation: title-show 0.5s ease-out;
+}
+
+@keyframes title-show {
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
